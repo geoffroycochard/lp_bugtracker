@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Ticket;
+use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,12 +11,31 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FakeController extends AbstractController
 {
+
+
+
     public function insert(EntityManagerInterface $em) 
     {    
         $title = sprintf('Ticket n°%d', rand(1,1000));
         $ticket = new Ticket();
         $ticket->setTitle($title);
         $ticket->setDate(new DateTime());
+
+        // Create Categoty
+        $category = (new Category())
+            ->setTitle('category '.rand())
+            ->addTicket($ticket)
+        ;
+        $em->persist($category);
+
+        // Create User
+        $user = (new User())
+            ->setUsername('username '.rand())
+            ->addTicket($ticket)
+        ;
+        $em->persist($user);
+
+
         // Intégration de l'objet dans le UnitOfWork doctrine
         $em->persist($ticket);
         // Préparation de la commande + commit
