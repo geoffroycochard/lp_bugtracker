@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -36,6 +37,7 @@ class Ticket
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="tickets")
+     * @Assert\Count(min = 1, minMessage="Il nous faut un User !!!! alors que tu en as donné {{ count }}")
      */
     private $users;
 

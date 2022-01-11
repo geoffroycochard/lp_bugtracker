@@ -9,3 +9,7 @@ fake_insert:
 fake_detail:
   path: /fake/detail/{id}
   controller: App\Controller\FakeController::detail
+
+fake_validate:
+  path: /fake/validate
+  controller: App\Controller\FakeController::validate

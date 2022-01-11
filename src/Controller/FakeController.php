@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class FakeController extends AbstractController
 {
@@ -59,6 +60,37 @@ class FakeController extends AbstractController
 
         var_export($ticket);
         return new Response(__METHOD__);
+    }
+
+    public function validate(
+        EntityManagerInterface $em,
+        ValidatorInterface $validator
+    )
+    {
+        $title = sprintf('Ticket n°%d', rand(1,1000));
+        $ticket = new Ticket();
+        $ticket->setTitle($title);
+        $ticket->setDate(new DateTime());
+
+        // Create Categoty
+        $category = (new Category())
+            ->setTitle('category '.rand())
+            ->addTicket($ticket)
+        ;
+        $em->persist($category);
+
+        $violations = $validator->validate($ticket);
+
+        dd($violations);
+        if ($violations->count()) {
+            dd($violations);
+        }
+
+
+        $em->persist($ticket);
+        $em->flush();
+
+        return new Response('is inserted !!!');
     }
 
 
