@@ -11,6 +11,10 @@
 <div class="example-wrapper">
     <h1>Ticket list from index ✅</h1>
 
+    <p>
+        <a href="{{ path('ticket_new') }}">Créer un ticket</a>
+    </p>
+
     <table>
         <thead>
             <tr>
@@ -18,6 +22,7 @@
                 <th>Date</th>
                 <th>Category</th>
                 <th>Users</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +35,11 @@
                 {% for user in ticket.users %}
                     {{ user.username }}
                 {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('ticket_edit', {id: ticket.id}) }}">
+                        Editer
+                    </a>
                 </td>
             </tr>
             {% endfor %}

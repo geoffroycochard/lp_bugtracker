@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de mes tickets{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Ticket new from new()</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="envoyer">
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}

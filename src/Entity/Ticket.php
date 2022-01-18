@@ -21,6 +21,7 @@ class Ticket
 
     /**
      * @ORM\Column(type="string", name="title")
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -59,11 +60,11 @@ class Ticket
         return $this;
     }
 
-    public function getDate(): \DateTime {
+    public function getDate(): ?\DateTime {
         return $this->date;
     }
 
-    public function setDate(\Datetime $date): Ticket {
+    public function setDate(?\Datetime $date): Ticket {
         $this->date = $date;
         return $this;
     }
