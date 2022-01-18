@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,18 +21,21 @@ class ContactController extends AbstractController
         FormFactoryInterface $formFactory
     ): Response
     {
-        // A partir de l'usine, j'obtiens un constructeur de formulaire
-        $builder = $formFactory->createBuilder();
+//        // A partir de l'usine, j'obtiens un constructeur de formulaire
+//        $builder = $formFactory->createBuilder();
+//
+//        // Grâce à ce constructeur, il me permet de configuter
+//        // et de paramétrer mon formulaire
+//        $builder
+//            ->add('name', TextType::class)
+//            ->add('message', TextareaType::class)
+//        ;
+//
+//        // De ce constructeur, je peux obtenir objet Form pour le traitement
+//        $form = $builder->getForm();
 
-        // Grâce à ce constructeur, il me permet de configuter
-        // et de paramétrer mon formulaire
-        $builder
-            ->add('name', TextType::class)
-            ->add('message', TextareaType::class)
-        ;
+        $form = $this->createForm(ContactType::class);
 
-        // De ce constructeur, je peux obtenir objet Form pour le traitement
-        $form = $builder->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
