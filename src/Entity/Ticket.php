@@ -26,6 +26,7 @@ class Ticket
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @Assert\NotNull()
      */
     private $date;
 
@@ -59,11 +60,11 @@ class Ticket
         return $this;
     }
 
-    public function getDate(): \DateTime {
+    public function getDate(): ?\DateTime {
         return $this->date;
     }
 
-    public function setDate(\Datetime $date): Ticket {
+    public function setDate(?\Datetime $date): Ticket {
         $this->date = $date;
         return $this;
     }

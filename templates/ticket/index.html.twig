@@ -18,6 +18,7 @@
                 <th>Date</th>
                 <th>Category</th>
                 <th>Users</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,11 @@
                 {% for user in ticket.users %}
                     {{ user.username }}
                 {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('ticket_edit', {'ticketId': ticket.id}) }}">
+                        Editer
+                    </a>
                 </td>
             </tr>
             {% endfor %}
